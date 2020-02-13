@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from apps.message_form.views import message_form
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('message_form/', message_form),
+    path('', message_form),
 ]
