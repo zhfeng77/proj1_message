@@ -120,3 +120,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    # 使用绝对路径
+    # "/Users/zhanghaifeng/PycharmProjects/proj1_message/static"
+    # 使用相对路径
+    # os.path.join(BASE_DIR, "/static")  BASE_DIR本身含有/，所以后面不能写/
+    os.path.join(BASE_DIR, "static"),
+
+]
