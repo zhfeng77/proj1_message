@@ -52,4 +52,26 @@ def message_form(request):
     # message.message="测试的消息内容"
     # message.save()
 
+
+    # 点击了提交按钮
+    if request.method =="POST":    # 点击submit按钮时会是一个post请求  <input type="submit" class="button" value="提交"/>
+        # 获取页面提交的数据
+        name = request.POST.get('name')  #<input id="name" type="text" name="name" class="error" placeholder="请输入您的姓名"/>
+        email = request.POST.get('email')#  <input id="email" type="email" value="" name="email" placeholder="请输入邮箱地址"/>
+        address =request.POST.get('address')
+        message_text = request.POST.get('message')
+        print(name,email,address,message_text)
+
+        # 将数据写入数据库
+        #创建数据对象
+        message = Message()     #创建模型对象(model_instance)
+        message.name = name
+        message.email=email
+        message.address = address
+        message.message = message_text
+        #将数据写入数据库
+        message.save()
+        print('成功保存一条记录')
+
+
     return render(request, "message_form.html")

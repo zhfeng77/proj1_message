@@ -7,3 +7,9 @@
 建立和message表和与页面数据相对应的字段
 - 5.从数据库中获取数据并展示（views.py)
 通过all,filter,get来获取数据，通过delete删除数据，通过save插入或更新数据
+- 6 从前端页面(html)提取数据存入数据库
+将message_form.html中<form action="/form/，改为<form action="/message_form/与urls.py中的    
+path('message_form/', message_form)相对应，表示点击提交(submit)按钮时会显示message_form/页面
+如果直接提交页面，会产生403错误，需要在</form>前添加 {% csrf_token %}
+通过request.POST.get()获取页面中的数据
+通过数据对象message = Message()的save()将数据写入数据库中
