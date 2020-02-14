@@ -5,3 +5,5 @@
 方式2:将样式文件放在项目根目录下的static/css目录中，在settings.py中添加STATICFILES_DIRS完成对static路径的设置
 - 4.建立与页面相关的数据库，并修改数据引擎为mysql，安装mysql的django驱动mysqlclient
 建立和message表和与页面数据相对应的字段
+- 5.从数据库中获取数据并展示（views.py)
+通过all,filter,get来获取数据，通过delete删除数据，通过save插入或更新数据
