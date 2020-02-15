@@ -55,11 +55,13 @@ def message_form(request):
 
     # 点击了提交按钮
     if request.method =="POST":    # 点击submit按钮时会是一个post请求  <input type="submit" class="button" value="提交"/>
+        print("POST")
         # 获取页面提交的数据
-        name = request.POST.get('name')  #<input id="name" type="text" name="name" class="error" placeholder="请输入您的姓名"/>
-        email = request.POST.get('email')#  <input id="email" type="email" value="" name="email" placeholder="请输入邮箱地址"/>
-        address =request.POST.get('address')
-        message_text = request.POST.get('message')
+        # 后面的空值，是给一个默认值，如果这个值不存在，就给个空，这样不容易出异常
+        name = request.POST.get('name','')  #<input id="name" type="text" name="name" class="error" placeholder="请输入您的姓名"/>
+        email = request.POST.get('email','')#  <input id="email" type="email" value="" name="email" placeholder="请输入邮箱地址"/>
+        address =request.POST.get('address','')
+        message_text = request.POST.get('message','')
         print(name,email,address,message_text)
 
         # 将数据写入数据库
@@ -69,9 +71,30 @@ def message_form(request):
         message.email=email
         message.address = address
         message.message = message_text
-        #将数据写入数据库
-        message.save()
-        print('成功保存一条记录')
+        if name:
+            #将数据写入数据库
+            message.save()
+            print('成功保存一条记录')
+
+    # 从数据库获取数据以便于显示在页面上
+    if request.method == "GET":
+        print("GET")
+        # 读取数据库，在这里直接取第1个数据
+        all_messages = Message.objects.all()
+        print(all_messages[0].name)
+        if all_messages:    # 如果不为空列表
+            message = all_messages[0]
+            print(message)
+            # name = message.name
+            # email = message.email
+            # address = message.address
+            # message_text = message.message
+            # print(name,email,address,message_text)
+            return render(request,"message_form.html", {
+                "message": message     #返回key:value形式的数据， 在message_form.html中可以用Django提供的模板语言引用这些数据
+            })
+        # else:
+        #     print('all_message is null')
 
 
     return render(request, "message_form.html")

@@ -15,25 +15,33 @@
     </h1>
     <label>
         <span>姓名 :</span>
-        <input id="name" type="text" name="name" class="error" placeholder="请输入您的姓名"/>
+{#                将view中返回的数据提供给value就可以在页面上显示该数据#}
+{#                这里使用message就是views.py中引号中写的名称#}
+{#                return render(request,"message_form.html", {#}
+{#                        "message": message     #返回key:value形式的数据， 在message_form.html中可以用Django提供的模板语言引用这些数据#}
+{#                    })#}
+        <input id="name" type="text" value="{{ message.name }}" name="name" class="error" placeholder="请输入您的姓名"/>
         <div class="error-msg"></div>
     </label>
 
     <label>
         <span>邮箱 :</span>
-        <input id="email" type="email" value="" name="email" placeholder="请输入邮箱地址"/>
+        {#        将view中返回的数据提供给value就可以在页面上显示该数据#}
+        <input id="email" type="email" value="{{ message.email }}" name="email" placeholder="请输入邮箱地址"/>
         <div class="error-msg"></div>
     </label>
 
     <label>
         <span>联系地址 :</span>
-        <input id="address" type="text" value="" name="address" placeholder="请输入联系地址"/>
+        {#        将view中返回的数据提供给value就可以在页面上显示该数据#}
+        <input id="address" type="text" value="{{ message.address }}" name="address" placeholder="请输入联系地址"/>
         <div class="error-msg"></div>
     </label>
 
     <label>
         <span>留言 :</span>
-        <textarea id="message" name="message"  placeholder="请输入你的建议"></textarea>
+{#                对于textarea,将view中返回的数据放在内容的部分，就可以在页面上显示该数据#}
+        <textarea id="message" name="message"  placeholder="请输入你的建议">{{ message.message }}</textarea>
         <div class="error-msg"></div>
     </label>
     <div class="success-msg"></div>
